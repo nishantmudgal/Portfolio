@@ -69,7 +69,7 @@ body {
 
 /* Light mode overrides for high-contrast slate-light experience */
 .light {
-  --color-background: #f8fafc;
+  --color-background: #f1f5f9;
   --color-on-background: #0f172a;
   
   --color-surface: rgba(255, 255, 255, 0.7);
@@ -82,7 +82,7 @@ body {
   --color-surface-container-highest: rgba(255, 255, 255, 0.95);
   
   --color-surface-bright: #ffffff;
-  --color-surface-dim: #f1f5f9;
+  --color-surface-dim: #e2e8f0;
   
   --color-outline: rgba(15, 23, 42, 0.15);
   --color-outline-variant: rgba(15, 23, 42, 0.08);
@@ -102,7 +102,7 @@ body {
 }
 
 body.light {
-  background-image: radial-gradient(circle at 80% 20%, #eef2ff 0%, #f8fafc 60%), radial-gradient(circle at 20% 80%, #fdf4ff 0%, #f8fafc 50%);
+  background-image: radial-gradient(circle at 80% 20%, #e0e7ff 0%, #f1f5f9 70%), radial-gradient(circle at 20% 80%, #fae8ff 0%, #f1f5f9 60%);
 }
 
 .light .glass-card {
