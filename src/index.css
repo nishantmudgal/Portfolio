@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505;
+  --color-on-background: #e2e8f0;
+  
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-on-surface: #ffffff;
+  
+  --color-surface-container: rgba(255, 255, 255, 0.03);
+  --color-surface-container-low: rgba(255, 255, 255, 0.015);
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-high: rgba(255, 255, 255, 0.07);
+  --color-surface-container-highest: rgba(255, 255, 255, 0.12);
+  
+  --color-surface-bright: rgba(255, 255, 255, 0.15);
+  --color-surface-dim: #050505;
+  
+  --color-outline: rgba(255, 255, 255, 0.15);
+  --color-outline-variant: rgba(255, 255, 255, 0.07);
+  --color-on-surface-variant: #94a3b8;
+  
+  --color-primary: #6366f1;
+  --color-primary-container: rgba(99, 102, 241, 0.1);
+  --color-on-primary-container: #c7d2fe;
+  
+  --color-secondary: #a855f7;
+  --color-secondary-container: rgba(168, 85, 247, 0.1);
+  --color-on-secondary-container: #f5f3ff;
+  
+  --color-tertiary: #10b981;
+  --color-tertiary-container: rgba(16, 185, 129, 0.1);
+  --color-on-tertiary-container: #ecfdf5;
+  
+  --color-error: #ef4444;
+  --color-error-container: rgba(239, 68, 68, 0.1);
+  --color-on-error-container: #fee2e2;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+body {
+  background-color: var(--color-background);
+  background-image: radial-gradient(circle at 80% 20%, #171836 0%, #050505 60%), radial-gradient(circle at 20% 80%, #240d35 0%, #050505 50%);
+  background-attachment: fixed;
+  color: var(--color-on-background);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Glassmorphic Panel Styles */
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Light mode overrides for high-contrast slate-light experience */
+.light {
+  --color-background: #f8fafc;
+  --color-on-background: #0f172a;
+  
+  --color-surface: rgba(255, 255, 255, 0.7);
+  --color-on-surface: #0f172a;
+  
+  --color-surface-container: rgba(255, 255, 255, 0.55);
+  --color-surface-container-low: rgba(255, 255, 255, 0.35);
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: rgba(255, 255, 255, 0.85);
+  --color-surface-container-highest: rgba(255, 255, 255, 0.95);
+  
+  --color-surface-bright: #ffffff;
+  --color-surface-dim: #f1f5f9;
+  
+  --color-outline: rgba(15, 23, 42, 0.15);
+  --color-outline-variant: rgba(15, 23, 42, 0.08);
+  --color-on-surface-variant: #475569;
+  
+  --color-primary: #4f46e5;
+  --color-primary-container: rgba(79, 70, 229, 0.08);
+  --color-on-primary-container: #312e81;
+  
+  --color-secondary: #7c3aed;
+  --color-secondary-container: rgba(124, 58, 237, 0.08);
+  --color-on-secondary-container: #4c1d95;
+  
+  --color-tertiary: #059669;
+  --color-tertiary-container: rgba(5, 150, 105, 0.08);
+  --color-on-tertiary-container: #064e3b;
+}
+
+body.light {
+  background-image: radial-gradient(circle at 80% 20%, #eef2ff 0%, #f8fafc 60%), radial-gradient(circle at 20% 80%, #fdf4ff 0%, #f8fafc 50%);
+}
+
+.light .glass-card {
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* Custom scrollbar matching design system */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: var(--radius-xl);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
