@@ -6,13 +6,15 @@ import SyntaxSteel from "./components/SyntaxSteel";
 import ContactProtocol from "./components/ContactProtocol";
 import Terminal from "./components/Terminal";
 import { 
-  Terminal as TerminalIcon, Sun, Moon, Sparkles, Layers, Briefcase, Award, Send, Cpu, Heart 
+  Terminal as TerminalIcon, Sun, Moon, Sparkles, Layers, Briefcase, Award, Send, Cpu, Heart, Menu, X 
 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>("about");
   const [isTerminalOpen, setIsTerminalOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   // Apply .light class to body if light mode is selected
   useEffect(() => {
@@ -66,7 +68,7 @@ export default function App() {
       
       {/* Premium Header Layout */}
       <header className="sticky top-0 z-40 w-full border-b border-outline-variant/40 bg-surface/50 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
           
           {/* Logo Name block */}
           <div className="flex items-center gap-3 text-left">
@@ -79,41 +81,44 @@ export default function App() {
               </span>
             </div>
             <div>
-              <h1 className="font-headline font-bold text-base tracking-tight text-on-surface">
+              <h1 className="font-headline font-bold text-sm sm:text-base tracking-tight text-on-surface">
                 Nishant Mudgal
               </h1>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-medium">
+              <p className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-on-surface-variant font-medium">
                 Frontend Architect / UI Engineer
               </p>
             </div>
           </div>
 
-          {/* Desktop Navigation Link rails */}
-          <nav className="flex flex-wrap items-center gap-1 sm:gap-2 justify-center md:justify-end">
-            {navItems.map((item) => {
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer ${
-                    isActive 
-                      ? "bg-primary/25 text-primary border-primary/40 shadow-sm" 
-                      : "bg-surface-container-low border-outline-variant/30 hover:border-outline-variant hover:bg-surface-container-high/80 text-on-surface-variant hover:text-on-surface"
-                  }`}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
+          {/* Actions & Navigation row */}
+          <div className="flex items-center gap-1.5 md:gap-3">
+            {/* Desktop Navigation Link rails (hidden on mobile) */}
+            <nav className="hidden md:flex items-center gap-2">
+              {navItems.map((item) => {
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer ${
+                      isActive 
+                        ? "bg-primary/25 text-primary border-primary/40 shadow-sm" 
+                        : "bg-surface-container-low border-outline-variant/30 hover:border-outline-variant hover:bg-surface-container-high/80 text-on-surface-variant hover:text-on-surface"
+                    }`}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
 
-            {/* Utility control triggers */}
-            <div className="flex items-center gap-1.5 ml-2 border-l border-outline-variant/40 pl-2">
+            {/* Utility control triggers & Hamburger button */}
+            <div className="flex items-center gap-1.5 border-l border-outline-variant/40 md:pl-3 pl-1.5">
               {/* Terminal query trigger */}
               <button 
                 onClick={() => setIsTerminalOpen(true)}
-                className="p-1.5 bg-surface-container-low border border-outline-variant/30 hover:border-primary/40 hover:bg-surface-container-high rounded-lg text-primary transition-colors cursor-pointer"
+                className="p-1.5 sm:p-2 bg-surface-container-low border border-outline-variant/30 hover:border-primary/40 hover:bg-surface-container-high rounded-lg text-primary transition-colors cursor-pointer"
                 title="Trigger Command Console [ ` ]"
               >
                 <TerminalIcon size={14} />
@@ -122,14 +127,61 @@ export default function App() {
               {/* Theme toggle switch */}
               <button 
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-1.5 bg-surface-container-low border border-outline-variant/30 hover:border-outline hover:bg-surface-container-high rounded-lg text-secondary transition-colors cursor-pointer"
+                className="p-1.5 sm:p-2 bg-surface-container-low border border-outline-variant/30 hover:border-outline hover:bg-surface-container-high rounded-lg text-secondary transition-colors cursor-pointer"
                 title={isDarkMode ? "Enable Light Mode" : "Enable Dark Mode"}
               >
                 {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
               </button>
+
+              {/* Hamburger Toggle (visible on mobile only) */}
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-1.5 sm:p-2 bg-surface-container-low border border-outline-variant/30 hover:border-outline hover:bg-surface-container-high rounded-lg text-on-surface transition-colors cursor-pointer"
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? <X size={14} /> : <Menu size={14} />}
+              </button>
             </div>
-          </nav>
+          </div>
         </div>
+
+        {/* Mobile Navigation Dropdown Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="md:hidden border-t border-outline-variant/30 bg-surface/95 backdrop-blur-xl overflow-hidden"
+            >
+              <nav className="flex flex-col gap-1 p-4">
+                {navItems.map((item) => {
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setActiveTab(item.id);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-2.5 text-xs font-mono font-medium rounded-lg border transition-all flex items-center gap-3 cursor-pointer text-left ${
+                        isActive 
+                          ? "bg-primary/20 text-primary border-primary/40 shadow-sm" 
+                          : "bg-surface-container-low/60 border-transparent hover:border-outline-variant hover:bg-surface-container-high/80 text-on-surface-variant hover:text-on-surface"
+                      }`}
+                    >
+                      <span className={isActive ? "text-primary" : "text-on-surface-variant"}>
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Main Core View Area */}
