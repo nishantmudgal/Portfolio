@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Terminal as TerminalIcon, X, CornerDownLeft, Circle } from "lucide-react";
 
 interface TerminalProps {
-  onClose: () => void;
-  setActiveTab: (tab: string) => void;
+  onClose?: () => void;
+  setActiveTab?: (tab: string) => void;
+  isEmbed?: boolean;
 }
 
-export default function Terminal({ onClose, setActiveTab }: TerminalProps) {
+export default function Terminal({ onClose, setActiveTab, isEmbed = false }: TerminalProps) {
   const [history, setHistory] = useState<string[]>([
     "Kinetic Syntax Terminal v1.1.2",
     "Type 'help' to review available architectural queries.",
@@ -76,38 +77,62 @@ export default function Terminal({ onClose, setActiveTab }: TerminalProps) {
         setHistory([]);
         setInput("");
         return;
-      case "goto about":
+            case "goto about":
       case "goto core":
-        setActiveTab("about");
-        reply = "Navigated to Architectural Core (About).";
+        if (setActiveTab) {
+          setActiveTab("about");
+          reply = "Navigated to Architectural Core (About).";
+        } else {
+          reply = "Tab routing is offline in embedded workspace.";
+        }
         break;
       case "goto projects":
       case "goto artifacts":
-        setActiveTab("projects");
-        reply = "Navigated to Curated Artifacts (Projects).";
+        if (setActiveTab) {
+          setActiveTab("projects");
+          reply = "Navigated to Curated Artifacts (Projects).";
+        } else {
+          reply = "Tab routing is offline in embedded workspace.";
+        }
         break;
       case "goto experience":
       case "goto timeline":
-        setActiveTab("experience");
-        reply = "Navigated to Professional Timeline (Experience).";
+        if (setActiveTab) {
+          setActiveTab("experience");
+          reply = "Navigated to Professional Timeline (Experience).";
+        } else {
+          reply = "Tab routing is offline in embedded workspace.";
+        }
         break;
       case "goto blogs":
       case "goto blogs & certs":
       case "goto certs":
-        setActiveTab("blogs");
-        reply = "Navigated to Syntax & Steel (Blogs & Certifications).";
+        if (setActiveTab) {
+          setActiveTab("blogs");
+          reply = "Navigated to Syntax & Steel (Blogs & Certifications).";
+        } else {
+          reply = "Tab routing is offline in embedded workspace.";
+        }
         break;
       case "goto contact":
       case "goto connect":
-        setActiveTab("contact");
-        reply = "Navigated to Let's Build (Contact Node).";
+        if (setActiveTab) {
+          setActiveTab("contact");
+          reply = "Navigated to Let's Build (Contact Node).";
+        } else {
+          reply = "Tab routing is offline in embedded workspace.";
+        }
         break;
       default:
         if (trimmed.startsWith("goto ")) {
           const target = trimmed.substring(5);
           if (["about", "projects", "experience", "blogs", "contact"].includes(target)) {
-            setActiveTab(target);
-            reply = `Navigated to ${target.toUpperCase()}.`;
+            if (setActiveTab) {
+              setActiveTab(target);
+              reply = `Navigated to ${target.toUpperCase()}.`;
+            } else {
+              reply = "Tab routing is offline in embedded workspace.";
+            }
           } else {
             reply = `Unknown node destination: "${target}". Try "goto about", "goto projects", etc.`;
           }
@@ -126,6 +151,62 @@ export default function Terminal({ onClose, setActiveTab }: TerminalProps) {
       handleCommand(input);
     }
   };
+
+  if (isEmbed) {
+    return (
+      <div className="w-full bg-surface-container border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm flex flex-col h-[350px] font-mono">
+        {/* Terminal Header */}
+        <div className="flex justify-between items-center bg-surface-container-high px-4 py-2 border-b border-outline-variant/60">
+          <div className="flex items-center gap-1.5">
+            <Circle size={10} className="fill-error/85 stroke-error/85 text-error" />
+            <Circle size={10} className="fill-secondary/85 stroke-secondary/85 text-secondary" />
+            <Circle size={10} className="fill-tertiary/85 stroke-tertiary/85 text-tertiary" />
+            <span className="text-xs text-on-surface-variant font-medium ml-2 flex items-center gap-1">
+              <TerminalIcon size={12} /> nmudgal@architecture:~
+            </span>
+          </div>
+          <span className="text-[9px] font-mono text-outline uppercase font-semibold">EMBEDDED_CONSOLE</span>
+        </div>
+
+        {/* Terminal Log View */}
+        <div 
+          ref={containerRef}
+          className="p-4 flex-1 overflow-y-auto space-y-1.5 text-xs text-on-surface-variant text-left font-mono"
+        >
+          {history.map((line, idx) => (
+            <div key={idx} className="whitespace-pre-wrap leading-relaxed">
+              {line.startsWith("nmudgal@architecture:~$") ? (
+                <span className="text-primary font-semibold">{line}</span>
+              ) : line.includes("Available terminal systems:") || line.includes("---") ? (
+                <span className="text-secondary">{line}</span>
+              ) : line.includes("PASS") || line.includes("SUCCESS") || line.includes("OK") ? (
+                <span className="text-tertiary">{line}</span>
+              ) : line.includes("Error") ? (
+                <span className="text-error">{line}</span>
+              ) : (
+                line
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Terminal Input Line */}
+        <div className="flex items-center bg-surface-container-low border-t border-outline-variant/60 px-4 py-2.5">
+          <span className="text-primary text-xs font-semibold shrink-0 mr-1.5 font-mono">nmudgal@architecture:~$</span>
+          <input 
+            ref={inputRef}
+            type="text" 
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="bg-transparent border-none text-xs font-mono text-on-surface outline-none flex-1 focus:ring-0 focus:outline-none p-0"
+            placeholder="Type 'help' and press Enter..."
+          />
+          <CornerDownLeft size={12} className="text-outline shrink-0 ml-1.5" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/85 backdrop-blur-md font-mono">

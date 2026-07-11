@@ -31,6 +31,8 @@ export interface Project {
   tags: string[];
   metrics: { label: string; value: string }[];
   highlight: string;
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 export interface Experience {
@@ -149,7 +151,9 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Theme Modes", value: "Light / Dark" },
       { label: "Interactive Layer", value: "Live Demos + Terminal" }
     ],
-    highlight: "Combines a clear professional profile with responsive design, reusable components, developer-focused interactions, and hands-on project demonstrations."
+    highlight: "Combines a clear professional profile with responsive design, reusable components, developer-focused interactions, and hands-on project demonstrations.",
+    liveUrl: "https://ais-pre-3wjzz3hcfrbigjjxzrribj-651985466334.asia-east1.run.app",
+    githubUrl: "https://github.com/nishantmudgal/Protfolio"
   }
 ];
 

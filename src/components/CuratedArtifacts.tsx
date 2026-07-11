@@ -4,12 +4,13 @@ import {
   HyperionDemo, WalletDemo, NexusDemo, PrismCanvasDemo 
 } from "./InteractiveWidget";
 import { 
-  Sparkles, Layers, Terminal, ChevronRight, Play, ExternalLink, RefreshCw, BarChart2 
+  Sparkles, Layers, Terminal as TerminalIcon, ChevronRight, Play, ExternalLink, RefreshCw, BarChart2, Github 
 } from "lucide-react";
+import Terminal from "./Terminal";
 
 export default function CuratedArtifacts() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [activeProjectDemo, setActiveProjectDemo] = useState<string>("hyperion-analytics");
+  const [activeProjectDemo, setActiveProjectDemo] = useState<string>("interactive-developer-portfolio");
 
   const categories = ["All", "Web Applications", "Tools & Packages", "Shaders/Creative"];
 
@@ -19,16 +20,16 @@ export default function CuratedArtifacts() {
 
   const renderActiveDemo = () => {
     switch (activeProjectDemo) {
-      // case "hyperion-analytics":
-      //   return <HyperionDemo />;
-      // case "kinetic-wallet":
-      //   return <WalletDemo />;
-      // case "nexus-orchestrator":
-      //   return <NexusDemo />;
-      //   case "prism-shaders":
-      //     return <PrismCanvasDemo />;
-        case "interactive-developer-portfolio":
-          return <Terminal />;
+      case "hyperion-analytics":
+        return <HyperionDemo />;
+      case "kinetic-wallet":
+        return <WalletDemo />;
+      case "nexus-orchestrator":
+        return <NexusDemo />;
+      case "prism-shaders":
+        return <PrismCanvasDemo />;
+      case "interactive-developer-portfolio":
+        return <Terminal isEmbed={true} />;
       default:
         return <HyperionDemo />;
     }
@@ -178,6 +179,33 @@ export default function CuratedArtifacts() {
                       <span className="w-1.5 h-1.5 rounded-full bg-tertiary shrink-0" />
                       <span className="line-clamp-1">{proj.highlight}</span>
                     </div>
+
+                    {(proj.liveUrl || proj.githubUrl) && (
+                      <div className="flex items-center gap-2 mt-3.5 pt-3 border-t border-outline-variant/20" onClick={(e) => e.stopPropagation()}>
+                        {proj.liveUrl && (
+                          <a 
+                            href={proj.liveUrl} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/45 rounded-lg text-[10px] font-mono text-primary font-semibold transition-all cursor-pointer"
+                          >
+                            <ExternalLink size={11} />
+                            <span>LIVE RUN</span>
+                          </a>
+                        )}
+                        {proj.githubUrl && (
+                          <a 
+                            href={proj.githubUrl} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant/50 hover:border-outline rounded-lg text-[10px] font-mono text-on-surface-variant hover:text-on-surface font-semibold transition-all cursor-pointer"
+                          >
+                            <Github size={11} />
+                            <span>SOURCE</span>
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Highlight bar indicator */}
