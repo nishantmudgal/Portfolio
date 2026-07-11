@@ -57,13 +57,13 @@ export default function ContactProtocol() {
   };
 
   const networkNodes = [
-    { label: "Email Node", value: "nishant.mudgal.tech@gmail.com", actionText: "COPY EMAIL" },
-    { label: "Mobile Node", value: "+91 9876543210", actionText: "COPY PHONE" }
+    { label: "Email Node", value: "3nishantmudgal@gmail.com", actionText: "COPY EMAIL" },
+    { label: "Mobile Node", value: "+91 8968774126", actionText: "COPY PHONE" }
   ];
 
   const externalLinks = [
-    { label: "GitHub Hub", link: "https://github.com", icon: <Github size={16} /> },
-    { label: "LinkedIn Connect", link: "https://linkedin.com", icon: <Linkedin size={16} /> },
+    { label: "GitHub Hub", link: "https://github.com/nishantmudgal", icon: <Github size={16} /> },
+    { label: "LinkedIn Connect", link: "https://www.linkedin.com/in/nishant-mudgal", icon: <Linkedin size={16} /> },
     { label: "LeetCode Matrix", link: "https://leetcode.com", icon: <Code size={16} /> }
   ];
 
@@ -139,10 +139,11 @@ export default function ContactProtocol() {
                   disabled={formStatus === "submitting"}
                   className="w-full bg-surface-container-lowest border border-outline-variant/60 rounded-lg px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-primary/50 cursor-pointer disabled:opacity-50"
                 >
-                  <option value="Enterprise Architecture">Enterprise Architecture</option>
-                  <option value="Custom Design Systems">Custom Design Systems</option>
-                  <option value="Performance Remediation">Performance Remediation</option>
-                  <option value="General Consulting">General Consulting</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Job Opportunity">Job Opportunity</option>
+                  <option value="Freelance or Contract Work">Freelance or Contract Work</option>
+                  <option value="Project Collaboration">Project Collaboration</option>
+                  <option value="Portfolio Feedback">Portfolio Feedback</option>
                 </select>
               </div>
             </div>
@@ -281,20 +282,16 @@ export default function ContactProtocol() {
 
             <div className="grid grid-cols-2 gap-3.5">
               <div className="bg-surface-container-low border border-outline-variant/20 p-2.5 rounded-lg text-center">
-                <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">PROD_DEPLOYMENTS</span>
-                <span className="text-lg font-mono font-bold text-on-surface">142+ Assemblies</span>
-              </div>
-              <div className="bg-surface-container-low border border-outline-variant/20 p-2.5 rounded-lg text-center">
-                <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">CORE_WEB_VITALS</span>
-                <span className="text-lg font-mono font-bold text-tertiary">99 / 100</span>
+                <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">CURRENT_STATUS</span>
+                <span className="text-lg font-mono font-bold text-on-surface">Open to Connect</span>
               </div>
               <div className="bg-surface-container-low border border-outline-variant/20 p-2.5 rounded-lg text-center">
                 <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">PHYSICAL_GRID_NODE</span>
-                <span className="text-xs font-mono font-bold text-on-surface truncate block mt-1">Bengaluru, IN (UTC+5.30)</span>
+                <span className="text-sm font-mono font-bold text-on-surface truncate block mt-1 text-tertiary">Delhi, IN (UTC+5:30)</span>
               </div>
               <div className="bg-surface-container-low border border-outline-variant/20 p-2.5 rounded-lg text-center flex flex-col justify-center">
-                <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">SOCKETS_UPTIME</span>
-                <span className="text-xs font-mono font-bold text-primary block">99.998%</span>
+                <span className="text-[8px] uppercase tracking-wider font-mono text-outline block">OPEN_PROTOCOLS</span>
+                <span className="text-xs font-mono font-bold text-primary block">Roles · Collaborations · Tech Discussions</span>
               </div>
             </div>
           </div>

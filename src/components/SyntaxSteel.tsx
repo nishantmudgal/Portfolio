@@ -109,15 +109,15 @@ export default function SyntaxSteel() {
                 </div>
                 <div className="space-y-1.5 max-w-sm mx-auto">
                   <h4 className="font-headline font-semibold text-on-surface text-base">
-                    Ledger Index Offline
+                    Ledger Index Empty
                   </h4>
                   <p className="text-xs text-on-surface-variant font-sans leading-relaxed">
-                    No technical articles or system ledgers have been cataloged in this node yet. Deep architectural analyses will compile here soon.
+                    No technical Blogs have been cataloged in this node yet. Deep architectural analyses will compile here soon.
                   </p>
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container border border-outline-variant/30 rounded-lg text-[10px] font-mono text-outline">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                  <span>STATUS: WAITING_FOR_COMPILATION</span>
+                  <span>STATUS: WAITING_FOR_ENTRIES</span>
                 </div>
               </div>
             )}
@@ -147,7 +147,7 @@ export default function SyntaxSteel() {
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-[10px] font-mono text-on-surface-variant">
                     <span>{cert.issuer}</span>
                     <span className="hidden sm:inline text-outline">•</span>
-                    <span>Issued {cert.date}</span>
+                    <span>Validity {cert.date}</span>
                   </div>
                   <div className="text-[9px] font-mono text-outline uppercase tracking-wider flex items-center gap-1">
                     <CheckCircle2 size={10} className="text-tertiary" />

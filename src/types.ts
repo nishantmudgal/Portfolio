@@ -243,121 +243,59 @@ export const EXPERIENCE_DATA: Experience[] = [
 
 export const CERTIFICATIONS_DATA: Certification[] = [
   {
-    name: "AWS Certified AI Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2024",
-    idCode: "AWS-AIP-773491"
-  },
-  {
-    name: "Microsoft Azure Fundamentals",
+    name: "Microsoft Certified: Azure Fundamentals",
     issuer: "Microsoft",
-    date: "2023",
-    idCode: "AZ900-884021"
+    date: "Lifetime",
+    idCode: "5EC8909AA6DC28A0"
   },
   {
-    name: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2022",
-    idCode: "AWS-CCP-992140"
+    name: "AWS Certified AI Practitioner",
+    issuer: "Amazon Web Services (AWS)",
+    date: "2026 - 2029",
+    idCode: "6b326e7e4c2b4084b0467b2b5c8d593a"
   }
 ];
 
 export const BLOGS_DATA: BlogPost[] = [
-  {
-    id: "scaling-frontend-architecture",
-    title: "Scaling Frontend Architecture in Enterprise Portals",
-    summary: "A deep dive into modular designs, domain-driven folder hierarchies, federated configurations, and how to maintain compile-time type-safety across distributed software teams.",
-    date: "May 15, 2024",
-    readTime: "8 min read",
-    category: "Architecture",
-    content: `
-# Scaling Frontend Architecture in Enterprise Portals
+//   {
+//     id: "scaling-frontend-architecture",
+//     title: "Scaling Frontend Architecture in Enterprise Portals",
+//     summary: "A deep dive into modular designs, domain-driven folder hierarchies, federated configurations, and how to maintain compile-time type-safety across distributed software teams.",
+//     date: "May 15, 2024",
+//     readTime: "8 min read",
+//     category: "Architecture",
+//     content: `
+// # Scaling Frontend Architecture in Enterprise Portals
 
-As organizations scale, their frontend platforms often devolve into rigid monoliths. Features become interlocked, deployment speeds crater, and different engineering teams accidentally override each other's visual states. 
+// As organizations scale, their frontend platforms often devolve into rigid monoliths. Features become interlocked, deployment speeds crater, and different engineering teams accidentally override each other's visual states. 
 
-In this article, we outline a modern architecture designed to sustain complex client portals without sacrificing development velocity.
+// In this article, we outline a modern architecture designed to sustain complex client portals without sacrificing development velocity.
 
-## 1. Domain-Driven Design (DDD) in Frontend Folders
-Instead of grouping files strictly by technical role (e.g., \`/components\`, \`/hooks\`, \`/services\`), structure your codebase by domain features. 
+// ## 1. Domain-Driven Design (DDD) in Frontend Folders
+// Instead of grouping files strictly by technical role (e.g., \`/components\`, \`/hooks\`, \`/services\`), structure your codebase by domain features. 
 
-\`\`\`bash
-src/
-├── domains/
-│   ├── identity/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   └── index.ts  # Clear public API contract
-│   ├── telemetry/
-│   └── billing/
-├── shared/
-│   ├── ui-kit/
-│   └── utils/
-\`\`\`
+// \`\`\`bash
+// src/
+// ├── domains/
+// │   ├── identity/
+// │   │   ├── components/
+// │   │   ├── hooks/
+// │   │   └── index.ts  # Clear public API contract
+// │   ├── telemetry/
+// │   └── billing/
+// ├── shared/
+// │   ├── ui-kit/
+// │   └── utils/
+// \`\`\`
 
-By enforcing a strict contract where domains can only communicate through defined entry points (\`index.ts\`), you prevent spaghetti code and make future migrations a breeze.
+// By enforcing a strict contract where domains can only communicate through defined entry points (\`index.ts\`), you prevent spaghetti code and make future migrations a breeze.
 
-## 2. Enforcing Strict Type boundaries
-Leverage TypeScript’s absolute imports and strict path mapping to lock down internal domain logic. Use ESLint rules to prevent developers from importing directly into the private folders of another domain.
+// ## 2. Enforcing Strict Type boundaries
+// Leverage TypeScript’s absolute imports and strict path mapping to lock down internal domain logic. Use ESLint rules to prevent developers from importing directly into the private folders of another domain.
 
-## 3. Bundle Budgets & Performance Guards
-Implement rigid bundle budgets within your compiler configurations. If any single feature bundle exceeds **50KB gzipped**, the build system should generate warning alerts or actively block the integration pipeline.
-    `
-  },
-  {
-    id: "implementing-csp-spas",
-    title: "Implementing CSP in Complex SPAs",
-    summary: "Securing modern single-page applications against injection vector exploits using Content Security Policy rules, nonces, and secure script-hashes without causing layout breaks.",
-    date: "Feb 28, 2024",
-    readTime: "6 min read",
-    category: "Security",
-    content: `
-# Implementing CSP in Complex SPAs
+// ## 3. Bundle Budgets & Performance Guards
+// Implement rigid bundle budgets within your compiler configurations. If any single feature bundle exceeds **50KB gzipped**, the build system should generate warning alerts or actively block the integration pipeline.
+//     `
+//   },
 
-Content Security Policy (CSP) is a critical defensive system designed to prevent Cross-Site Scripting (XSS) and data injection exploits. However, many developers avoid setting strict headers because it risks breaking visual layout systems or block third-party analytics trackers.
-
-Here is the step-by-step guideline for implementing a rigid CSP that keeps your app secure and fully functional.
-
-## The Problem: Dynamic Script Injections
-Traditional SPA tools inject inline styles and dynamic script bundles on the fly. Under a secure CSP, rules like \`unsafe-inline\` and \`unsafe-eval\` must be **fully banned**.
-
-## The Solution: Strict CSP Matrix
-To secure your frontend without breaking dynamic updates:
-
-1. **Use Nonces for Hydrated Scripts**: Generate a cryptographic cryptographically random single-use token (nonce) on the backend for each request and bind it to script tags.
-2. **Hash Static Bundles**: Include SHA-256 hashes of known vendor files inside your header instructions:
-   \`\`\`http
-   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-abc...'; style-src 'self' 'unsafe-hashes';
-   \`\`\`
-3. **Connect-src Constraints**: Explicitly white-list the exact domain API endpoints that the client-side state is allowed to query.
-
-By enforcing these simple guards, you close the primary loops exploited by malicious browser injectors.
-    `
-  },
-  {
-    id: "logic-of-latency",
-    title: "The Logic of Latency: Perceived Performance Optimization",
-    summary: "Beyond raw load-time metrics, this article explores spatial design, eager layout skeletons, micro-interactions, and request queuing to make heavy applications feel instantly responsive.",
-    date: "Nov 12, 2023",
-    readTime: "10 min read",
-    category: "Performance",
-    content: `
-# The Logic of Latency: Perceived Performance Optimization
-
-If a page loads in 1.2 seconds but flashes blank screens three times, users perceive it as sluggish. Conversely, if a page takes 2 seconds but guides attention smoothly with transition physics, it feels instantaneous. 
-
-Visual performance is about **perceived latency**, not just raw network timings.
-
-## 1. Eliminate Cumulative Layout Shifts (CLS)
-Always reserve spaces for asynchronous content using elegant skeleton blocks. A layout that shifts even slightly when an image loads causes cognitive distress to the user.
-
-## 2. Dynamic Priority Queuing
-Do not load all API feeds in parallel. Sequence them:
-- **Priority 1**: Immediate visible viewport (e.g., Hero title, main visual)
-- **Priority 2**: Secondary functional states (e.g., buttons, interactables)
-- **Priority 3**: Below-the-fold telemetry metrics
-
-## 3. Optimistic Visual Reconciliations
-When a user toggles an option or submits a form, do not force them to wait for the network round-trip. Instantly update the client-side interface to show the successful target state, and silently resolve the action in the background. If a network failure occurs, execute a graceful, animated rollback.
-    `
-  }
 ];
