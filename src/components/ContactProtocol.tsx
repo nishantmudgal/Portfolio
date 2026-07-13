@@ -100,7 +100,7 @@ export default function ContactProtocol() {
                   required
                   disabled={formStatus === "submitting"}
                   className="w-full bg-surface-container-lowest border border-outline-variant/60 rounded-lg px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-primary/50 disabled:opacity-50"
-                  placeholder="e.g. Linus Torvalds"
+                  placeholder="e.g. Nishant Mudgal"
                 />
               </div>
 
@@ -114,7 +114,7 @@ export default function ContactProtocol() {
                   required
                   disabled={formStatus === "submitting"}
                   className="w-full bg-surface-container-lowest border border-outline-variant/60 rounded-lg px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-primary/50 disabled:opacity-50"
-                  placeholder="e.g. linus@kernel.org"
+                  placeholder="e.g. 3nishantmudgal@gmail.com"
                 />
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function ContactProtocol() {
                   onChange={handleInputChange}
                   disabled={formStatus === "submitting"}
                   className="w-full bg-surface-container-lowest border border-outline-variant/60 rounded-lg px-3 py-2 text-xs font-mono text-on-surface focus:outline-none focus:border-primary/50 disabled:opacity-50"
-                  placeholder="e.g. Linux Foundation"
+                  placeholder="e.g. Your Organisation"
                 />
               </div>
 
